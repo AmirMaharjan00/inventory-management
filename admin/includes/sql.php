@@ -230,7 +230,7 @@ function tableExists($table){
  }
 
  /*Function for find all sales*/
- function find_all_sale(){
+ function find_all_sale( $user_id ){
    global $db;
    $sql  = "SELECT s.id,s.qty,s.price,s.date,p.name";
    $sql .= " FROM sales s";
@@ -293,5 +293,18 @@ function  monthlySales($year){
   $sql .= " ORDER BY date_format(s.date, '%c' ) ASC";
   return find_by_sql($sql);
 }
+
+
+ /*Function for Finding all product name
+   /* JOIN with categorie  and media database table*/
+   function get_all_products(){
+    global $db;
+    $sql  = "SELECT s.id,s.qty,s.price,s.date,p.name";
+    $sql .= " FROM sales s";
+    $sql .= " LEFT JOIN products p ON s.product_id = p.id";
+    $sql .= " ORDER BY s.date DESC";
+    // return $sql;
+   return find_by_sql($sql);
+  }
 
 ?>
