@@ -7,6 +7,7 @@
 <?php
 
   if(isset($_POST['add_sale'])){
+    $user_id = $_SESSION['user_id'];
     $req_fields = array('s_id','quantity','price','total', 'date' );
     validate_fields($req_fields);
         if(empty($errors)){
@@ -17,9 +18,9 @@
           $s_date    = make_date();
 
           $sql  = "INSERT INTO sales (";
-          $sql .= " product_id,qty,price,date";
+          $sql .= " product_id,qty,price,date,user_id";
           $sql .= ") VALUES (";
-          $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}'";
+          $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}', '{$user_id}'";
           $sql .= ")";
 
                 if($db->query($sql)){
@@ -61,7 +62,7 @@
       <div class="panel-heading clearfix">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          <span>Sale Eidt</span>
+          <span>Sale Edit</span>
        </strong>
       </div>
       <div class="panel-body">
@@ -75,7 +76,32 @@
             <th> Date</th>
             <th> Action</th>
            </thead>
-             <tbody  id="product_info"> </tbody>
+             <tbody id="product_info">
+              <?Php
+
+                global $db;
+                $order_query = 'SELECT * FROM products';
+                $order_result = $db->query( $order_query );
+                if ( $order_result->num_rows > 0 ) {
+                  while($row = $order_result->fetch_assoc()) {
+                    ?>
+                      <tr>
+                        <td id="s_name"><?php echo $row['name']?></td>
+                        <input type="hidden" name="s_id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="total" value="<?php echo $row['sale_price']; ?>">
+                        <td><input type="number" min="0" class="form-control" name="price" value="<?php echo $row['sale_price']; ?>"></td>
+                        <td id="s_qty"><input type="number" min="1" max="<?php echo $row['quantity']; ?>" class="form-control" name="quantity" value="1"></td>
+                        <td><input type="number" min="0" class="form-control" name="total_indicator" value="<?php echo $row['sale_price']; ?>" disabled></td>
+                        <td><input type="date" class="form-control datePicker" name="date" data-date data-date-format="yyyy-mm-dd"></td>
+                        <td><button onclick="addrow()" name="add_sale" class="btn btn-primary">Add sale</button></td>
+                      </tr>
+                    <?php   
+                  }
+                } else {
+                  echo "0 results";
+                }
+              ?>
+             </tbody>
          </table>
        </form>
       </div>

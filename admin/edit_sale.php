@@ -78,15 +78,16 @@ if(!$sale){
                 <td id="s_name">
                   <input type="text" class="form-control" id="sug_input" name="title" value="<?php echo remove_junk($product['name']); ?>">
                   <div id="result" class="list-group"></div>
+                  <input type="hidden" name="total" value="<?php echo $row['sale_price']; ?>">
                 </td>
                 <td id="s_qty">
-                  <input type="text" class="form-control" name="quantity" value="<?php echo (int)$sale['qty']; ?>">
+                  <input type="number" min="1" max="<?php echo $product['quantity']?>" class="form-control" name="quantity" value="<?php echo (int)$sale['qty']; ?>">
                 </td>
                 <td id="s_price">
-                  <input type="text" class="form-control" name="price" value="<?php echo remove_junk($product['sale_price']); ?>" >
+                  <input type="number" min="0" class="form-control" name="price" value="<?php echo remove_junk($sale['price']); ?>" >
                 </td>
                 <td>
-                  <input type="text" class="form-control" name="total" value="<?php echo remove_junk($sale['price']); ?>">
+                  <input type="number" class="form-control" name="total_indicator" value="<?php echo remove_junk($sale['price']); ?>" disabled>
                 </td>
                 <td id="s_date">
                   <input type="date" class="form-control datepicker" name="date" data-date-format="" value="<?php echo remove_junk($sale['date']); ?>">

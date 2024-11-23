@@ -5,7 +5,7 @@
    page_require_level(3);
 ?>
 <?php
-$sales = find_all_sale();
+$products = get_all_products( $_SESSION['user_id'] );
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
@@ -19,10 +19,10 @@ $sales = find_all_sale();
         <div class="panel-heading clearfix">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>All Sales</span>
+            <span>All Products</span>
           </strong>
           <div class="pull-right">
-            <a href="add_sale.php" class="btn btn-primary">Add sale</a>
+            <a href="add_sale.php" class="btn btn-primary">Add Product</a>
           </div>
         </div>
         <div class="panel-body">
@@ -38,19 +38,21 @@ $sales = find_all_sale();
              </tr>
             </thead>
            <tbody>
-             <?php foreach ($sales as $sale):?>
+             <?php
+             foreach ($products as $product):?>
+                
              <tr>
                <td class="text-center"><?php echo count_id();?></td>
-               <td><?php echo remove_junk($sale['name']); ?></td>
-               <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
-               <td class="text-center"><?php echo remove_junk($sale['price']); ?></td>
-               <td class="text-center"><?php echo $sale['date']; ?></td>
+               <td><?php echo remove_junk($product['name']); ?></td>
+               <td class="text-center"><?php echo (int)$product['qty']; ?></td>
+               <td class="text-center"><?php echo remove_junk($product['price']); ?></td>
+               <td class="text-center"><?php echo $product['date']; ?></td>
                <td class="text-center">
                   <div class="btn-group">
-                     <a href="edit_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
+                     <a href="edit_sale.php?id=<?php echo (int)$product['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-edit"></span>
                      </a>
-                     <a href="delete_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
+                     <a href="delete_sale.php?id=<?php echo (int)$product['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-trash"></span>
                      </a>
                   </div>

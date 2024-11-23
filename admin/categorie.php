@@ -31,7 +31,6 @@
 
   <div class="row">
      <div class="col-md-12">
-      <?php var_dump ($msg);?>
        <?php echo display_msg($msg); ?>
      </div>
   </div>
