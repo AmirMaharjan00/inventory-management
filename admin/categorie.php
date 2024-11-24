@@ -43,6 +43,7 @@
             <span>Add New Categorie</span>
          </strong>
         </div>
+
         <div class="panel-body">
           <form method="post" action="categorie.php">
             <div class="form-group">
@@ -53,6 +54,7 @@
         </div>
       </div>
     </div>
+
     <div class="col-md-7">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -62,6 +64,22 @@
        </strong>
       </div>
         <div class="panel-body">
+          
+          <!-- popover -->
+          <div popover id="popover" class="popup">
+            <h2>Delete Item</h2>
+            <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+            <div class="buttons">
+              <button data-bs-toggle="popover" id="cancelButton" class="cancel btn-cancel" data-dismiss="modal">Cancel</button>
+              <button id="confirmButton" class="confirm">
+                <a class="delete-button" data-toggle="tooltip" title="Remove">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </button>
+            </div>
+          </div>
+          <!-- popover finish -->
+
           <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
@@ -72,7 +90,7 @@
             </thead>
             <tbody>
               <?php foreach ($all_categories as $cat):?>
-                <tr>
+                <tr data-id="<?php echo (int)$cat['id'];?>">
                     <td class="text-center"><?php echo count_id();?></td>
                     <td><?php echo remove_junk(ucfirst($cat['name'])); ?></td>
                     <td class="text-center">
@@ -80,12 +98,11 @@
                         <a href="edit_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                           <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <a href="delete_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                        <button popovertarget="popover" class="trash-button" data-toggle="tooltip" title="Remove">
                           <span class="glyphicon glyphicon-trash"></span>
-                        </a>
+                        </button>
                       </div>
                     </td>
-
                 </tr>
               <?php endforeach; ?>
             </tbody>
@@ -96,3 +113,16 @@
    </div>
   </div>
   <?php include_once('layouts/footer.php'); ?>
+  <script>
+    $('.trash-button').on('click', function(){
+      let _this = $(this), id = _this.parents('tr').data('id')
+      _this.parents('body').find('.delete-button').attr('href', 'delete_categorie.php?id=' + id )
+      _this.parents('body').find('#popover').css({
+        display: 'block'
+      })
+    })
+    document.getElementById('cancelButton').addEventListener('click', function() {
+        let popover = document.getElementById('popover')
+        popover.style.display = 'none';  // Hide the popover
+    });
+  </script>

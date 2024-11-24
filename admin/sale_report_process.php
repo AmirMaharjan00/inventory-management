@@ -87,10 +87,10 @@ $results = '';
           <tr>
               <th>Date</th>
               <th>Product Title</th>
-              <th>Buying Price</th>
-              <th>Selling Price</th>
+              <th>Buying Price (in $)</th>
+              <th>Selling Price (in $)</th>
               <th>Total Qty</th>
-              <th>TOTAL</th>
+              <th>TOTAL (in $)</th>
           </tr>
         </thead>
         <tbody>
@@ -103,7 +103,7 @@ $results = '';
               <td class="text-right"><?php echo remove_junk($result['buy_price']);?></td>
               <td class="text-right"><?php echo remove_junk($result['sale_price']);?></td>
               <td class="text-right"><?php echo remove_junk($result['total_sales']);?></td>
-              <td class="text-right"><?php echo remove_junk($result['total_saleing_price']);?></td>
+              <td class="text-right"><?php echo remove_junk($result['total_selling_price']);?></td>
           </tr>
         <?php endforeach; ?>
         </tbody>

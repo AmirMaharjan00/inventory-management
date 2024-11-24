@@ -19,10 +19,10 @@ $products = get_all_products( $_SESSION['user_id'] );
         <div class="panel-heading clearfix">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>All Products</span>
+            <span>All Orders</span>
           </strong>
           <div class="pull-right">
-            <a href="add_sale.php" class="btn btn-primary">Add Product</a>
+            <a href="add_sale.php" class="btn btn-primary">Add an Order</a>
           </div>
         </div>
         <div class="panel-body">
@@ -32,7 +32,7 @@ $products = get_all_products( $_SESSION['user_id'] );
                 <th class="text-center" style="width: 50px;">#</th>
                 <th> Product name </th>
                 <th class="text-center" style="width: 15%;"> Quantity</th>
-                <th class="text-center" style="width: 15%;"> Total </th>
+                <th class="text-center" style="width: 15%;"> Total (in $) </th>
                 <th class="text-center" style="width: 15%;"> Date </th>
                 <th class="text-center" style="width: 100px;"> Actions </th>
              </tr>

@@ -218,8 +218,8 @@ function tableExists($table){
    return find_by_sql($sql);
  }
 
- /*Function for Find Highest saleing Product*/
- function find_higest_saleing_product($limit){
+ /*Function for Find Highest selling Product*/
+ function find_higest_selling_product($limit){
    global $db;
    $sql  = "SELECT p.name, COUNT(s.product_id) AS totalSold, SUM(s.qty) AS totalQty";
    $sql .= " FROM sales s";
@@ -257,7 +257,7 @@ function find_sale_by_dates($start_date,$end_date){
   $sql  = "SELECT s.date, p.name,p.sale_price,p.buy_price,";
   $sql .= "COUNT(s.product_id) AS total_records,";
   $sql .= "SUM(s.qty) AS total_sales,";
-  $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price,";
+  $sql .= "SUM(p.sale_price * s.qty) AS total_selling_price,";
   $sql .= "SUM(p.buy_price * s.qty) AS total_buying_price ";
   $sql .= "FROM sales s ";
   $sql .= "LEFT JOIN products p ON s.product_id = p.id";
@@ -272,7 +272,7 @@ function  dailySales($year,$month){
   global $db;
   $sql  = "SELECT s.qty,";
   $sql .= " DATE_FORMAT(s.date, '%Y-%m-%e') AS date,p.name,";
-  $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price";
+  $sql .= "SUM(p.sale_price * s.qty) AS total_selling_price";
   $sql .= " FROM sales s";
   $sql .= " LEFT JOIN products p ON s.product_id = p.id";
   $sql .= " WHERE DATE_FORMAT(s.date, '%Y-%m' ) = '{$year}-{$month}'";
@@ -285,7 +285,7 @@ function  monthlySales($year){
   global $db;
   $sql  = "SELECT s.qty,";
   $sql .= " DATE_FORMAT(s.date, '%Y-%m-%e') AS date,p.name,";
-  $sql .= "SUM(p.sale_price * s.qty) AS total_saleing_price";
+  $sql .= "SUM(p.sale_price * s.qty) AS total_selling_price";
   $sql .= " FROM sales s";
   $sql .= " LEFT JOIN products p ON s.product_id = p.id";
   $sql .= " WHERE DATE_FORMAT(s.date, '%Y' ) = '{$year}'";
