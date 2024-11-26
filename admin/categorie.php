@@ -73,7 +73,7 @@
               <button data-bs-toggle="popover" id="cancelButton" class="cancel btn-cancel" data-dismiss="modal">Cancel</button>
               <button id="confirmButton" class="confirm">
                 <a class="delete-button" data-toggle="tooltip" title="Remove">
-                  <span class="glyphicon glyphicon-trash"></span>
+                  Delete
                 </a>
               </button>
             </div>
@@ -98,7 +98,7 @@
                         <a href="edit_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                           <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <button popovertarget="popover" class="trash-button" data-toggle="tooltip" title="Remove">
+                        <button popovertarget="popover" class="trash-button btn btn-danger btn-xs" data-toggle="tooltip" title="Remove">
                           <span class="glyphicon glyphicon-trash"></span>
                         </button>
                       </div>

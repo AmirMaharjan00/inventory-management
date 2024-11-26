@@ -452,3 +452,25 @@ img.img-size-2 {
   width: 125px;
   height: 125px;
 }
+
+/* Popover */
+.popup {
+  text-align: center;
+  padding: 20px;
+  border: 2px solid #939393;
+}
+
+.popup h2 {
+  margin: 0 0 15px;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.popup p {
+  font-size: 15px;
+}
+
+.popup .confirm a {
+  color: #000;
+  text-decoration: none;
+}

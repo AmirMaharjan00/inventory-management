@@ -26,6 +26,22 @@ $products = get_all_products( $_SESSION['user_id'] );
           </div>
         </div>
         <div class="panel-body">
+
+        <!-- popover -->
+        <div popover id="popover" class="popup">
+          <h2>Delete Item</h2>
+          <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+          <div class="buttons">
+            <button data-bs-toggle="popover" id="cancelButton" class="cancel btn-cancel" data-dismiss="modal">Cancel</button>
+            <button id="confirmButton" class="confirm">
+              <a class="delete-button" data-toggle="tooltip" title="Remove">
+                Delete
+              </a>
+            </button>
+          </div>
+        </div>
+        <!-- popover finish -->
+          
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -52,9 +68,12 @@ $products = get_all_products( $_SESSION['user_id'] );
                      <a href="edit_sale.php?id=<?php echo (int)$product['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-edit"></span>
                      </a>
-                     <a href="delete_sale.php?id=<?php echo (int)$product['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
+                     <!-- <a href="delete_sale.php?id=<?php #echo (int)$product['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-trash"></span>
-                     </a>
+                     </a> -->
+                     <button popovertarget="popover" class="trash-button btn btn-danger btn-xs" data-toggle="tooltip" title="Remove">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </button>
                   </div>
                </td>
              </tr>
@@ -66,3 +85,17 @@ $products = get_all_products( $_SESSION['user_id'] );
     </div>
   </div>
 <?php include_once('layouts/footer.php'); ?>
+
+<script>
+    $('.trash-button').on('click', function(){
+      let _this = $(this), id = _this.parents('tr').data('id')
+      _this.parents('body').find('.delete-button').attr('href', 'delete_sale.php?id=' + id )
+      _this.parents('body').find('#popover').css({
+        display: 'block'
+      })
+    })
+    document.getElementById('cancelButton').addEventListener('click', function() {
+        let popover = document.getElementById('popover')
+        popover.style.display = 'none';  // Hide the popover
+    });
+  </script>

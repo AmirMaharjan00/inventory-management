@@ -25,6 +25,22 @@
          <a href="add_user.php" class="btn btn-info pull-right">Add New User</a>
       </div>
      <div class="panel-body">
+
+     <!-- popover -->
+     <div popover id="popover" class="popup">
+      <h2>Delete Item</h2>
+      <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+      <div class="buttons">
+        <button data-bs-toggle="popover" id="cancelButton" class="cancel btn-cancel" data-dismiss="modal">Cancel</button>
+        <button id="confirmButton" class="confirm">
+          <a class="delete-button" data-toggle="tooltip" title="Remove">
+            Delete
+          </a>
+        </button>
+      </div>
+    </div>
+    <!-- popover finish -->
+
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -56,11 +72,14 @@
              <div class="btn-group">
                 <a href="edit_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                   <i class="glyphicon glyphicon-pencil"></i>
-               </a>
-          <a href="delete_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
-                  <i class="glyphicon glyphicon-remove"></i>
                 </a>
-                </div>
+                <!-- <a href="delete_user.php?id=<?php #echo (int)$a_user['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                  <i class="glyphicon glyphicon-remove"></i>
+                </a> -->
+                <button popovertarget="popover" class="trash-button btn btn-danger btn-xs" data-toggle="tooltip" title="Remove">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </div>
            </td>
           </tr>
         <?php endforeach;?>
@@ -70,4 +89,18 @@
     </div>
   </div>
 </div>
-  <?php include_once('layouts/footer.php'); ?>
+<?php include_once('layouts/footer.php'); ?>
+
+<script>
+    $('.trash-button').on('click', function(){
+      let _this = $(this), id = _this.parents('tr').data('id')
+      _this.parents('body').find('.delete-button').attr('href', 'delete_user.php?id=' + id )
+      _this.parents('body').find('#popover').css({
+        display: 'block'
+      })
+    })
+    document.getElementById('cancelButton').addEventListener('click', function() {
+        let popover = document.getElementById('popover')
+        popover.style.display = 'none';  // Hide the popover
+    });
+  </script>
