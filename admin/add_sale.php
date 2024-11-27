@@ -1,5 +1,4 @@
 <?php
-var_dump (($_POST));
   $page_title = 'Add Sale';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page

@@ -62,16 +62,16 @@ function total() {
     /* Price */
     $('#product_info input[name=price]').change(function(e) {
         let _this = $(this), value = _this.val()
-        let quantityValue = _this.parents('tr').find('input[name=quantity]').val()
-        _this.parents('tr').find('input[name=total]').val( quantityValue * value )
-        _this.parents('tr').find('input[name=total_indicator]').val( quantityValue * value )
+        let quantityValue = _this.parents('.form-wrapper').find('input[name=quantity]').val()
+        _this.parents('.form-wrapper').find('input[name=total]').val( quantityValue * value )
+        _this.parents('.form-wrapper').find('input[name=total_indicator]').val( quantityValue * value )
     });
     /* Quantity */
     $('#product_info input[name=quantity]').change(function(e) {
         let _this = $(this), value = _this.val()
-        let priceValue = _this.parents('tr').find('input[name=price]').val()
-        _this.parents('tr').find('input[name=total]').val( priceValue * value )
-        _this.parents('tr').find('input[name=total_indicator]').val( priceValue * value )
+        let priceValue = _this.parents('.form-wrapper').find('input[name=price]').val()
+        _this.parents('.form-wrapper').find('input[name=total]').val( priceValue * value )
+        _this.parents('.form-wrapper').find('input[name=total_indicator]').val( priceValue * value )
     });
 }
 
