@@ -55,7 +55,7 @@ var_dump (($_POST));
     </form>
   </div>
 </div>
-<div class="row">
+<div class="row sales-table-head">
 
   <div class="col-md-12">
     <div class="panel panel-default">
@@ -86,14 +86,16 @@ var_dump (($_POST));
                     ?>
                       <div class="table-row">
                         <form method="post" action="add_sale.php">
-                          <div id="s_name"><?php echo $row['name']; ?></div>
-                          <input type="hidden" name="s_id" value="<?php echo $row['id']; ?>">
-                          <input type="hidden" name="total" value="<?php echo $row['sale_price']; ?>">
-                          <div><input type="number" min="0" class="form-control" name="price" value="<?php echo $row['sale_price']; ?>"></div>
-                          <div id="s_qty"><input type="number" min="1" max="<?php echo $row['quantity']; ?>" class="form-control" name="quantity" value="1"></div>
-                          <div><input type="number" min="0" class="form-control" name="total_indicator" value="<?php echo $row['sale_price']; ?>" disabled></div>
-                          <div><input type="date" class="form-control datePicker" name="date" data-date data-date-format="yyyy-mm-dd"></div>
-                          <div><button name="add_sale" class="btn btn-primary">Add sale</button></div>
+                          <div class="form-wrapper">
+                            <div id="s_name"><?php echo $row['name']; ?></div>
+                            <input type="hidden" name="s_id" value="<?php echo $row['id']; ?>">
+                            <input type="hidden" name="total" value="<?php echo $row['sale_price']; ?>">
+                            <div><input type="number" min="0" class="form-control" name="price" value="<?php echo $row['sale_price']; ?>"></div>
+                            <div id="s_qty"><input type="number" min="1" max="<?php echo $row['quantity']; ?>" class="form-control" name="quantity" value="1"></div>
+                            <div><input type="number" min="0" class="form-control" name="total_indicator" value="<?php echo $row['sale_price']; ?>" disabled></div>
+                            <div><input type="date" class="form-control datePicker" name="date" data-date data-date-format="yyyy-mm-dd"></div>
+                            <div><button name="add_sale" class="btn btn-primary">Add sale</button></div>
+                          </div>
                         </form>
                       </div>
                     <?php   

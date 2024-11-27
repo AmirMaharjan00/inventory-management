@@ -474,3 +474,19 @@ img.img-size-2 {
   color: #000;
   text-decoration: none;
 }
+
+/* sales table */
+.sales-table-head .table {
+  padding: 15px;
+}
+
+.sales-table-head .table-head {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.table-body form .form-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
