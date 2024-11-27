@@ -42,7 +42,7 @@ var_dump (($_POST));
 <div class="row">
   <div class="col-md-6">
     <?php echo display_msg($msg); ?>
-    <!-- <form method="post" autocomplete="off" id="sug-form">
+    <form method="post" autocomplete="off" id="sug-form">
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-btn">
@@ -52,7 +52,7 @@ var_dump (($_POST));
          </div>
          <div id="result" class="list-group"></div>
         </div>
-    </form> -->
+    </form>
   </div>
 </div>
 <div class="row">
@@ -66,17 +66,16 @@ var_dump (($_POST));
        </strong>
       </div>
       <div class="panel-body">
-        <form method="post" action="add_sale.php" id="sale-form">
-         <table class="table table-bordered">
-           <thead>
-            <th> Item </th>
-            <th> Price </th>
-            <th> Qty </th>
-            <th> Total </th>
-            <th> Date</th>
-            <th> Action</th>
-           </thead>
-             <tbody id="product_info">
+         <div class="table table-bordered">
+           <div class="table-head">
+            <span class="table-head"> Item </span>
+            <span class="table-head"> Price </span>
+            <span class="table-head"> Qty </span>
+            <span class="table-head"> Total </span>
+            <span class="table-head"> Date</span>
+            <span class="table-head"> Action</span>
+           </div>
+             <div id="product_info" class="table-body">
               <?Php
 
                 global $db;
@@ -85,25 +84,26 @@ var_dump (($_POST));
                 if ( $order_result->num_rows > 0 ) {
                   while($row = $order_result->fetch_assoc()) {
                     ?>
-                      <tr>
-                        <td id="s_name"><?php echo $row['name']?></td>
-                        <input type="hidden" name="s_id" value="<?php echo $row['id']; ?>">
-                        <input type="hidden" name="total" value="<?php echo $row['sale_price']; ?>">
-                        <td><input type="number" min="0" class="form-control" name="price" value="<?php echo $row['sale_price']; ?>"></td>
-                        <td id="s_qty"><input type="number" min="1" max="<?php echo $row['quantity']; ?>" class="form-control" name="quantity" value="1"></td>
-                        <td><input type="number" min="0" class="form-control" name="total_indicator" value="<?php echo $row['sale_price']; ?>" disabled></td>
-                        <td><input type="date" class="form-control datePicker" name="date" data-date data-date-format="yyyy-mm-dd"></td>
-                        <td><button form="sale-form" type="submit" name="add_sale" class="btn btn-primary">Add sale</button></td>
-                      </tr>
+                      <div class="table-row">
+                        <form method="post" action="add_sale.php">
+                          <div id="s_name"><?php echo $row['name']; ?></div>
+                          <input type="hidden" name="s_id" value="<?php echo $row['id']; ?>">
+                          <input type="hidden" name="total" value="<?php echo $row['sale_price']; ?>">
+                          <div><input type="number" min="0" class="form-control" name="price" value="<?php echo $row['sale_price']; ?>"></div>
+                          <div id="s_qty"><input type="number" min="1" max="<?php echo $row['quantity']; ?>" class="form-control" name="quantity" value="1"></div>
+                          <div><input type="number" min="0" class="form-control" name="total_indicator" value="<?php echo $row['sale_price']; ?>" disabled></div>
+                          <div><input type="date" class="form-control datePicker" name="date" data-date data-date-format="yyyy-mm-dd"></div>
+                          <div><button name="add_sale" class="btn btn-primary">Add sale</button></div>
+                        </form>
+                      </div>
                     <?php   
                   }
                 } else {
                   echo "0 results";
                 }
               ?>
-             </tbody>
-         </table>
-       </form>
+             </div>
+         </div>
       </div>
     </div>
   </div>
