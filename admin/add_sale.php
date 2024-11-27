@@ -1,11 +1,11 @@
 <?php
+var_dump (($_POST));
   $page_title = 'Add Sale';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
    page_require_level(3);
 ?>
 <?php
-
   if(isset($_POST['add_sale'])){
     $user_id = $_SESSION['user_id'];
     $req_fields = array('s_id','quantity','price','total', 'date' );
@@ -42,17 +42,17 @@
 <div class="row">
   <div class="col-md-6">
     <?php echo display_msg($msg); ?>
-    <form method="post" action="ajax.php" autocomplete="off" id="sug-form">
+    <!-- <form method="post" autocomplete="off" id="sug-form">
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary">Find It</button>
+              <button form="sug-form" type="submit" class="btn btn-primary">Find It</button>
             </span>
             <input type="text" id="sug_input" class="form-control" name="title"  placeholder="Search for product name">
          </div>
          <div id="result" class="list-group"></div>
         </div>
-    </form>
+    </form> -->
   </div>
 </div>
 <div class="row">
@@ -66,7 +66,7 @@
        </strong>
       </div>
       <div class="panel-body">
-        <form method="post" action="add_sale.php">
+        <form method="post" action="add_sale.php" id="sale-form">
          <table class="table table-bordered">
            <thead>
             <th> Item </th>
@@ -93,7 +93,7 @@
                         <td id="s_qty"><input type="number" min="1" max="<?php echo $row['quantity']; ?>" class="form-control" name="quantity" value="1"></td>
                         <td><input type="number" min="0" class="form-control" name="total_indicator" value="<?php echo $row['sale_price']; ?>" disabled></td>
                         <td><input type="date" class="form-control datePicker" name="date" data-date data-date-format="yyyy-mm-dd"></td>
-                        <td><button onclick="addrow()" name="add_sale" class="btn btn-primary">Add sale</button></td>
+                        <td><button form="sale-form" type="submit" name="add_sale" class="btn btn-primary">Add sale</button></td>
                       </tr>
                     <?php   
                   }

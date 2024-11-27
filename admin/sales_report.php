@@ -28,6 +28,7 @@ $page_title = 'Sale Report';
             </div>
             <div class="form-group">
                  <button type="submit" name="submit" class="btn btn-primary">Generate Report</button>
+                 <button type="submit" name="download" class="btn btn-success">Download Report</button>
             </div>
           </form>
       </div>

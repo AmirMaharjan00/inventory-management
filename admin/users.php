@@ -55,7 +55,7 @@
         </thead>
         <tbody>
         <?php foreach($all_users as $a_user): ?>
-          <tr>
+          <tr data-id="<?php echo (int)$a_user['id'];?>">
            <td class="text-center"><?php echo count_id();?></td>
            <td><?php echo remove_junk(ucwords($a_user['name']))?></td>
            <td><?php echo remove_junk(ucwords($a_user['username']))?></td>
@@ -73,9 +73,6 @@
                 <a href="edit_user.php?id=<?php echo (int)$a_user['id'];?>" class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                   <i class="glyphicon glyphicon-pencil"></i>
                 </a>
-                <!-- <a href="delete_user.php?id=<?php #echo (int)$a_user['id'];?>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
-                  <i class="glyphicon glyphicon-remove"></i>
-                </a> -->
                 <button popovertarget="popover" class="trash-button btn btn-danger btn-xs" data-toggle="tooltip" title="Remove">
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>

@@ -55,9 +55,8 @@ $products = get_all_products( $_SESSION['user_id'] );
             </thead>
            <tbody>
              <?php
-             foreach ($products as $product):?>
-                
-             <tr>
+             foreach ($products as $product):?>                
+             <tr data-id="<?php echo (int)$product['id'];?>">
                <td class="text-center"><?php echo count_id();?></td>
                <td><?php echo remove_junk($product['name']); ?></td>
                <td class="text-center"><?php echo (int)$product['qty']; ?></td>
@@ -68,9 +67,6 @@ $products = get_all_products( $_SESSION['user_id'] );
                      <a href="edit_sale.php?id=<?php echo (int)$product['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-edit"></span>
                      </a>
-                     <!-- <a href="delete_sale.php?id=<?php #echo (int)$product['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
-                       <span class="glyphicon glyphicon-trash"></span>
-                     </a> -->
                      <button popovertarget="popover" class="trash-button btn btn-danger btn-xs" data-toggle="tooltip" title="Remove">
                       <span class="glyphicon glyphicon-trash"></span>
                     </button>
