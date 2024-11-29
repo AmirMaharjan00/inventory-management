@@ -10,8 +10,7 @@ function suggetion() {
         var formData = {
             'product_name': $('input[name=title]').val()
         };
-
-        if (formData['product_name'].length >= 1) {
+        if (formData['product_name']) {
             // process the form
             $.ajax({
                 type: 'POST',
@@ -37,9 +36,9 @@ function suggetion() {
             });
             
             /* Live Search Logic */
-            $('#product_info #s_name').each(function(){
+            $('#sales-table .product-title').each(function(){
                 let _this = $(this)
-                if( _this.text().includes( formData.product_name ) ) {
+                if( _this.text().toLowerCase().includes(formData.product_name.toLowerCase()) ) {
                     _this.parents('tr').show()
                 } else {
                     _this.parents('tr').hide()
@@ -49,7 +48,6 @@ function suggetion() {
         } else {
             $("#result").hide();
             $('#product_info #s_name').each(function(){
-                // console.log( $(this) )
                 $(this).parents('tr').show()
             })
         };
@@ -75,7 +73,7 @@ function total() {
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function($) {
 
     //tooltip
     $('[data-toggle="tooltip"]').tooltip();
@@ -88,10 +86,50 @@ $(document).ready(function() {
     // Callculate total ammont
     total();
 
-    $('.datepicker')
-        .datepicker({
-            format: 'yyyy-mm-dd',
-            todayHighlight: true,
-            autoclose: true
-        });
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        todayHighlight: true,
+        autoclose: true
+    });
+
+
+    /**
+     * download report in pdf
+     */
+    $('#download-report').on('click', function (event) {
+        event.preventDefault()
+        var content = $('.table.table-border').html();
+        var styles = $('link[rel="stylesheet"]').toArray().map(link => link.outerHTML).join('');
+        var printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Print Preview</title>
+                ${styles}
+            </head>
+            <body>${content}</body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+        printWindow.close();
+    })
+    
+    /**
+     * product live search
+     */
+    $('#product_search_input').keyup(function(e) {
+        let _this = $(this), value = _this.val().toLowerCase()
+        $('.product-table .product-title').each(function(){
+            let current = $(this)
+            if( current.text().toLowerCase().includes(value) ) {
+                current.parents('tr').show()
+            } else {
+                current.parents('tr').hide()
+            }
+        })
+    })
 });

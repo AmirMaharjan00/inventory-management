@@ -13,7 +13,7 @@ if (isset($_POST['submit']) || isset($_POST['download'])) {
         $end_date = remove_junk($db->escape($_POST['end-date']));
         $results = find_sale_by_dates($start_date, $end_date);
         // var_dump ($results);
-        ob_start(); // Start output buffering
+        // ob_start(); // Start output buffering
 ?>
 <!doctype html>
 <html lang="en-US">
@@ -61,16 +61,16 @@ if (isset($_POST['submit']) || isset($_POST['download'])) {
                     </tr>
                     <tr>
                         <td colspan="4"></td>
-                        <td>Profit</td>
+                        <td><?php echo ( total_price($results)[1] > 0 ? 'Profit' : 'Loss' ); ?></td>
                         <td>$<?php echo number_format(total_price($results)[1], 2); ?></td>
                     </tr>
                 </tfoot>
             </table>
             <div class="text-right" style="margin-top: 20px; margin-bottom: 20px;">
-                <form method="post" action="">
+                <form method="post">
                     <input type="hidden" name="start-date" value="<?php echo $start_date; ?>">
                     <input type="hidden" name="end-date" value="<?php echo $end_date; ?>">
-                    <button type="submit" name="download" class="btn btn-success">Download Report</button>
+                    <button type="submit" name="download" class="btn btn-success" id="download-report">Download Report</button>
                 </form>
                 <a href="http://localhost/inventory-management/admin/sales_report.php" class="btn btn-primary">Go Back</a>
             </div>
@@ -79,6 +79,10 @@ if (isset($_POST['submit']) || isset($_POST['download'])) {
 <?php else: ?>
     <p>Sorry, no sales have been found.</p>
 <?php endif; ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="libs/js/functions.js"></script>
 </body>
 </html>
 <?php

@@ -262,7 +262,7 @@ function find_sale_by_dates($start_date,$end_date){
   $sql .= "FROM sales s ";
   $sql .= "LEFT JOIN products p ON s.product_id = p.id";
   $sql .= " WHERE s.date BETWEEN '{$start_date}' AND '{$end_date}'";
-  $sql .= " GROUP BY DATE(s.date), p.name";
+  $sql .= " GROUP BY s.date, p.name";
   $sql .= " ORDER BY DATE(s.date) DESC";
   // return $sql;
   return $db->query($sql);
@@ -277,20 +277,20 @@ function  dailySales($year,$month){
   $sql .= " FROM sales s";
   $sql .= " LEFT JOIN products p ON s.product_id = p.id";
   $sql .= " WHERE DATE_FORMAT(s.date, '%Y-%m' ) = '{$year}-{$month}'";
-  $sql .= " GROUP BY DATE_FORMAT( s.date, '%e' ),s.product_id";
+  $sql .= " GROUP BY s.date,s.product_id";
   return find_by_sql($sql);
 }
 
 /*Function for Generate Monthly sales report*/
 function  monthlySales($year){
   global $db;
-  $sql  = "SELECT s.qty,";
+  $sql  = "SELECT SUM(s.qty) AS qty,";
   $sql .= " DATE_FORMAT(s.date, '%Y-%m-%e') AS date,p.name,";
   $sql .= "SUM(p.sale_price * s.qty) AS total_selling_price";
   $sql .= " FROM sales s";
   $sql .= " LEFT JOIN products p ON s.product_id = p.id";
   $sql .= " WHERE DATE_FORMAT(s.date, '%Y' ) = '{$year}'";
-  $sql .= " GROUP BY DATE_FORMAT( s.date,  '%c' ),s.product_id";
+  $sql .= " GROUP BY s.date,s.product_id";
   $sql .= " ORDER BY date_format(s.date, '%c' ) ASC";
   return find_by_sql($sql);
 }

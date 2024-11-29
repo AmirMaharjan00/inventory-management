@@ -61,7 +61,7 @@
       </div>
       <!-- popover finish -->
         
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped" id="sales-table">
           <thead>
             <tr>
               <th class="text-center" style="width: 50px;">#</th>
@@ -76,7 +76,7 @@
            <?php foreach ($products as $product): ?>                
            <tr data-id="<?php echo (int)$product['id']; ?>">
              <td class="text-center"><?php echo count_id(); ?></td>
-             <td><?php echo remove_junk($product['name']); ?></td>
+             <td class="product-title"><?php echo remove_junk($product['name']); ?></td>
              <td class="text-center"><?php echo (int)$product['qty']; ?></td>
              <td class="text-center"><?php echo remove_junk($product['price']); ?></td>
              <td class="text-center"><?php echo $product['date']; ?></td>

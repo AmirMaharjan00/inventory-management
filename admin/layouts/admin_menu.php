@@ -60,7 +60,7 @@
 
   <li>
     <a href="abc_analysis.php">
-      <i class="glyphicon glyphicon-star"></i>
+      <i class="	glyphicon glyphicon-font"></i>
       <span>Abc Analysis</span>
     </a>
   </li>

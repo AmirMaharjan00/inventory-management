@@ -25,7 +25,7 @@
             <span class="input-group-btn">
               <button form="sug-form" type="submit" class="btn btn-primary">Find It</button>
             </span>
-            <input type="text" id="sug_input" class="form-control" name="title" placeholder="Search for product name">
+            <input type="text" id="product_search_input" class="form-control" name="title" placeholder="Search for product name">
         </div>
         <div id="result" class="list-group"></div>
         </div>  
@@ -56,7 +56,7 @@
           </div>
           <!-- popover finish -->
 
-          <table class="table table-bordered">
+          <table class="table table-bordered product-table">
             <thead>
               <tr>
                 <th class="text-center" style="width: 50px;">#</th>
@@ -73,7 +73,7 @@
               <?php foreach ($products as $product):?>
               <tr data-id="<?php echo (int)$product['id'];?>">
                 <td class="text-center"><?php echo count_id();?></td>
-                <td> <?php echo remove_junk($product['name']); ?></td>
+                <td class="product-title"> <?php echo remove_junk($product['name']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['categorie']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['quantity']); ?></td>
                 <td class="text-center"> <?php echo remove_junk($product['buy_price']); ?></td>
