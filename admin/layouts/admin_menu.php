@@ -50,4 +50,18 @@
       <li><a href="daily_sales.php">Daily sales</a> </li>
     </ul>
   </li>
+
+  <li>
+    <a href="sales_prediction.php">
+      <i class="glyphicon glyphicon-star"></i>
+      <span>Sales Prediction</span>
+    </a>
+  </li>
+
+  <li>
+    <a href="abc_analysis.php">
+      <i class="glyphicon glyphicon-star"></i>
+      <span>Abc Analysis</span>
+    </a>
+  </li>
 </ul>

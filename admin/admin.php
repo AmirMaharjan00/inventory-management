@@ -144,10 +144,9 @@
         </strong>
       </div>
       <div class="panel-body">
-
         <div class="list-group">
       <?php foreach ($recent_products as  $recent_product): ?>
-            <a class="list-group-item clearfix" href="edit_product.php?id=<?php echo    (int)$recent_product['id'];?>">
+            <a class="list-group-item clearfix" href="edit_product.php?id=<?php echo (int)$recent_product['id'];?>">
                 <h4 class="list-group-item-heading">
                 <?php echo remove_junk(first_character($recent_product['name']));?>
                   <span class="label label-warning pull-right">
@@ -174,8 +173,5 @@
       </div>
    </div>
   </div>
-
-
-
 
 <?php include_once('layouts/footer.php'); ?>

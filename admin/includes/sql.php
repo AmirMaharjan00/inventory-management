@@ -262,15 +262,16 @@ function find_sale_by_dates($start_date,$end_date){
   $sql .= "FROM sales s ";
   $sql .= "LEFT JOIN products p ON s.product_id = p.id";
   $sql .= " WHERE s.date BETWEEN '{$start_date}' AND '{$end_date}'";
-  $sql .= " GROUP BY DATE(s.date),p.name";
+  $sql .= " GROUP BY DATE(s.date), p.name";
   $sql .= " ORDER BY DATE(s.date) DESC";
+  // return $sql;
   return $db->query($sql);
 }
 
 /*Function for Generate Daily sales report*/
 function  dailySales($year,$month){
   global $db;
-  $sql  = "SELECT SUM(s.qty) ,";
+  $sql  = "SELECT SUM(s.qty) AS qty,";
   $sql .= " DATE_FORMAT(s.date, '%Y-%m-%e') AS date,p.name,";
   $sql .= "SUM(p.sale_price * s.qty) AS total_selling_price";
   $sql .= " FROM sales s";

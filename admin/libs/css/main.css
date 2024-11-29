@@ -490,3 +490,9 @@ img.img-size-2 {
   display: flex;
   justify-content: space-between;
 }
+
+.sales-predictions-table,
+.product-content-wrap.panel-body {
+  max-height: 510px;
+  overflow-y: auto;
+}

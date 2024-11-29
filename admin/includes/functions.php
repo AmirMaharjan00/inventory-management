@@ -118,4 +118,21 @@ function pdfDirCreate(){
       }
   
   }
+
+// abs analysis
+function get_abc_analysis_data() {
+  global $db;
+  
+  // Query to join products and sales and calculate annual usage value
+  $sql = "SELECT p.id, p.name, p.quantity, p.buy_price, p.sale_price, 
+                 SUM(s.qty) AS total_qty_sold, 
+                 (p.sale_price * SUM(s.qty)) AS annual_usage_value
+          FROM products p
+          LEFT JOIN sales s ON p.id = s.product_id
+          GROUP BY p.id
+          ORDER BY annual_usage_value DESC";
+  
+  return find_by_sql($sql);
+}
+
 ?>

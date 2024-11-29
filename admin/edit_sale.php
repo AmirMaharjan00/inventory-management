@@ -78,7 +78,8 @@ if(!$sale){
                 <td id="s_name">
                   <input type="text" class="form-control" id="sug_input" name="title" value="<?php echo remove_junk($product['name']); ?>">
                   <div id="result" class="list-group"></div>
-                  <input type="hidden" name="total" value="<?php echo $row['sale_price']; ?>">
+                  <!-- <input type="hidden" name="total" value="<?php #echo $row['sale_price']; ?>"> -->
+                  <input type="hidden" name="total" value="<?php echo remove_junk($sale['price']); ?>">
                 </td>
                 <td id="s_qty">
                   <input type="number" min="1" max="<?php echo $product['quantity']?>" class="form-control" name="quantity" value="<?php echo (int)$sale['qty']; ?>">

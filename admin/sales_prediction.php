@@ -86,30 +86,38 @@ $predictions = predict_sales($sales_data, 30);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Predictions</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="libs/css/main.css">
 </head>
 <body>
     <div class="container">
         <h1 class="text-center">Sales Predictions</h1>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Day</th>
-                    <th>Predicted Sales Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($predictions as $product_id => $future_sales): ?>
-                    <?php foreach ($future_sales as $sale): ?>
-                        <tr>
-                            <td><?php echo remove_junk($sales_data[$product_id][0]['product_name']); ?></td>
-                            <td><?php echo date('Y-m-d', $sale['day'] * 86400); ?></td>
-                            <td><?php echo round($sale['predicted_qty'], 2); ?></td>
-                        </tr>
+        <div class="sales-predictions-table">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Day</th>
+                        <th>Predicted Sales Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($predictions as $product_id => $future_sales): ?>
+                        <?php foreach ($future_sales as $sale): ?>
+                            <tr>
+                                <td><?php echo remove_junk($sales_data[$product_id][0]['product_name']); ?></td>
+                                <td><?php echo date('Y-m-d', $sale['day'] * 86400); ?></td>
+                                <td><?php echo round($sale['predicted_qty'], 2); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     <?php endforeach; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-right" style="margin-top: 20px; margin-bottom: 20px;">
+            <a href="http://localhost/inventory-management/admin/home.php" class="btn btn-primary">
+                Back to Home
+            </a>
+        </div>
     </div>
 </body>
 </html>

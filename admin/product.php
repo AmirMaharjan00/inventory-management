@@ -2,14 +2,36 @@
   $page_title = 'All Product';
   require_once('includes/load.php');
   // Checking What level user has permission to view this page
-   page_require_level(2);
+  page_require_level(2);
+
+  // Fetch products
   $products = join_product_table();
+
+  // Sort products by 'quantity' in descending order
+  usort($products, function($a, $b) {
+      return $b['quantity'] <=> $a['quantity'];
+  });
 ?>
 <?php include_once('layouts/header.php'); ?>
   <div class="row">
      <div class="col-md-12">
        <?php echo display_msg($msg); ?>
      </div>
+
+    <div class="col-md-6">
+      <form method="post" autocomplete="off" id="sug-form">
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button form="sug-form" type="submit" class="btn btn-primary">Find It</button>
+            </span>
+            <input type="text" id="sug_input" class="form-control" name="title" placeholder="Search for product name">
+        </div>
+        <div id="result" class="list-group"></div>
+        </div>  
+      </form>
+    </div>
+    
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -17,7 +39,7 @@
            <a href="add_product.php" class="btn btn-primary">Add New</a>
          </div>
         </div>
-        <div class="panel-body">
+        <div class="product-content-wrap panel-body">
 
           <!-- popover -->
           <div popover id="popover" class="popup">
@@ -74,7 +96,7 @@
               </tr>
              <?php endforeach; ?>
             </tbody>
-          </tabel>
+          </table>
         </div>
       </div>
     </div>
